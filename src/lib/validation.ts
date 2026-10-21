@@ -35,3 +35,22 @@ export const signUpSchema = z
 
 export type SignInInput = z.input<typeof signInSchema>;
 export type SignUpInput = z.input<typeof signUpSchema>;
+
+/** Mirrors the `portfolios.name` CHECK constraint (1-80 chars after trimming). */
+export const portfolioNameSchema = z
+  .string()
+  .trim()
+  .min(1, "Enter a name")
+  .max(80, "Use at most 80 characters");
+
+export const portfolioFormSchema = z.object({ name: portfolioNameSchema });
+
+export const renamePortfolioSchema = z.object({
+  id: z.uuid("Invalid portfolio"),
+  name: portfolioNameSchema,
+});
+
+export const portfolioIdSchema = z.uuid("Invalid portfolio");
+
+export type PortfolioFormInput = z.input<typeof portfolioFormSchema>;
+export type RenamePortfolioInput = z.input<typeof renamePortfolioSchema>;
