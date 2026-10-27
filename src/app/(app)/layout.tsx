@@ -4,6 +4,7 @@ import { AppFooter } from "@/components/layout/app-footer";
 import { AppHeader } from "@/components/layout/app-header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { SidebarContent } from "@/components/layout/sidebar-content";
+import { QueryProvider } from "@/components/providers/query-provider";
 import { getCurrentUser } from "@/lib/data/auth";
 import { getActivePortfolio, getPortfolios } from "@/lib/data/portfolios";
 
@@ -48,7 +49,7 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
           tabIndex={-1}
           className="flex-1 p-4 outline-none md:p-6"
         >
-          {children}
+          <QueryProvider>{children}</QueryProvider>
         </main>
         <AppFooter />
       </div>
